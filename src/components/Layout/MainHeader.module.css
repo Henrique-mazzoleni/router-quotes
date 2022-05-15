@@ -1,0 +1,27 @@
+.header {
+    background-color: #555;
+    color: #eee;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 10vh;
+    padding: 0 10%;
+    justify-content: space-between;
+}
+
+.header h2 {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.header a {
+    font-size: 1.2rem;
+    color: #bbb;
+    margin-left: 20px;
+}
+
+.header a:hover,
+.header a.avtive {
+    color: #eee;
+    font-size: 1.25rem;
+}
