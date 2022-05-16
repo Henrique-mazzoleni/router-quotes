@@ -21,7 +21,7 @@
 }
 
 .header a:hover,
-.header a.avtive {
+.header a.active {
     color: #eee;
     font-size: 1.25rem;
 }

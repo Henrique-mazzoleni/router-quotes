@@ -1,11 +1,10 @@
-import MainHeader from './components/Layout/MainHeader';
-
+import Layout from './components/Layout/Layout';
 import styles from './App.module.css';
 
 function App() {
   return (
     <div className={styles.app}>
-      <MainHeader />
+      <Layout />
     </div>
   );
 }

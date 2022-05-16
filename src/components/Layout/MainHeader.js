@@ -7,8 +7,8 @@ const MainHeader = () => {
     <header className={styles.header}>
       <h2>Great Quotes</h2>
       <nav>
-        <NavLink activeClassName="active" to="/quotes">All Quotes</NavLink>
-        <NavLink activeClassName="active" to="/quotes/add">Add a Quote</NavLink>
+        <NavLink activeClassName={styles.active} to="/quotes" exact>All Quotes</NavLink>
+        <NavLink activeClassName={styles.active} to="/quotes/add">Add a Quote</NavLink>
       </nav>
     </header>
   );
