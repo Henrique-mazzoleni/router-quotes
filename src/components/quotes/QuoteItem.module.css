@@ -1,0 +1,25 @@
+.quote {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0df;
+    border: 1px solid #0df;
+    border-radius: 10px;
+    box-shadow: 0 3px #bbb;
+    margin-bottom: 20px;
+    padding: 20px 15px;
+}
+
+.text h2 {
+    margin-bottom: 5px;
+}
+
+.text p {
+    font-style: italic;
+}
+
+.button {
+    background-color: #777;
+    border-color: #777;
+    color: #ddd;
+}

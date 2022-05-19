@@ -1,0 +1,13 @@
+
+.quotes {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    width: 700px;
+}
+
+.sorting {
+    margin: 20px 0;
+    padding: 15px 0;
+    border-bottom: 2px solid #ccc;
+}
