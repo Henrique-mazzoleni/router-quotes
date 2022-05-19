@@ -5,36 +5,21 @@ import Button from "../components/ui/Button";
 
 import styles from "./Quotes.module.css";
 
-const DUMMY_QUOTES = [
-  {
-    id: "q1",
-    text: "Fumar faz bem",
-    author: "Sebastiao",
-    created_at: new Date(1990, 1, 8),
-  },
-  {
-    id: "q2",
-    text: "iaoéai",
-    author: "Seu Zézinho",
-    created_at: new Date(1991, 1, 4),
-  },
-];
-
-const Quotes = () => {
+const Quotes = (props) => {
   const [orderAscending, setOrderAscending] = useState(true);
   const [renderedQuotes, setRenderedQuotes] = useState([]);
 
   useEffect(() => {
-    DUMMY_QUOTES.sort((a, b) => {
+    props.list.sort((a, b) => {
       if (orderAscending) return a.created_at - b.created_at;
       return b.created_at - a.created_at;
     });
     setRenderedQuotes(
-      DUMMY_QUOTES.map((quote) => (
-        <QuoteItem key={quote.id} text={quote.text} author={quote.author} />
+      props.list.map((quote) => (
+        <QuoteItem key={quote.id} id={quote.id} text={quote.text} author={quote.author} />
       ))
     );
-  }, [orderAscending]);
+  }, [orderAscending, props.list]);
 
   const toggleOrderHandler = () => {
     setOrderAscending((state) => !state);

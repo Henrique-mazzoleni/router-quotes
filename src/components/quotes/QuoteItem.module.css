@@ -19,7 +19,11 @@
 }
 
 .button {
+    text-decoration: none;
     background-color: #777;
     border-color: #777;
+}
+
+.button a {
     color: #ddd;
 }
