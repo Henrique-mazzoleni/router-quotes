@@ -1,9 +1,10 @@
 import { Fragment } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import MainHeader from "./MainHeader";
 import Quotes from "../../pages/Quotes";
 import SingleQuote from "../../pages/SingleQuote";
+import AddQuote from "../../pages/AddQuote";
 
 const DUMMY_QUOTES = [
   {
@@ -44,12 +45,18 @@ const Layout = () => {
   return (
     <Fragment>
       <MainHeader />
+      <Route path="/" exact>
+        <Redirect to="/quotes" />
+      </Route>
       <Switch>
         <Route path="/quotes" exact>
           <Quotes list={DUMMY_QUOTES} />
         </Route>
         <Route path="/quotes/:quoteId">
           <SingleQuote list={DUMMY_QUOTES} />
+        </Route>
+        <Route path="/add_quote">
+          <AddQuote />
         </Route>
       </Switch>
     </Fragment>
