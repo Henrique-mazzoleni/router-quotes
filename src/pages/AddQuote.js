@@ -2,9 +2,13 @@ import QuoteForm from "../components/quotes/QuoteForm"
 
 import styles from './AddQuote.module.css';
 
-const AddQuote = () => {
+const AddQuote = (props) => {
+    const addQuoteHandler = (author, text) => {
+        props.onAddQuote(author, text)
+    }
+
     return <div className={styles.card}>
-        <QuoteForm />
+        <QuoteForm onAddQuote={addQuoteHandler} />
     </div>
 }
 

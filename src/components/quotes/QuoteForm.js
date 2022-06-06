@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 
 import styles from "./QuoteForm.module.css";
 
-const QuoteForm = () => {
+const QuoteForm = (props) => {
   const [authorInput, setAuthorInput] = useState('');
   const [textInput, setTextInput] = useState('');
 
@@ -28,7 +28,8 @@ const QuoteForm = () => {
 
   const textInputHandler = (event) => {
     setTextInput(event.target.value)
-    if (!validText && textInput.trim() !== "") setValidText(true); 
+    if (event.target.value.trim() !== "") setValidText(true)
+    else setValidText(false)
   }
 
   const textBlurHandler = () => {
@@ -38,13 +39,13 @@ const QuoteForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (!validAuthor || !validText) return;
+    if (!validAuthor || !validText) {
+      setAuthorBlur(true);
+      setTextBlur(true);
+      return;
+    }
 
-    console.log(
-      "Submiting...",
-      authorInput,
-      textInput
-    );
+    props.onAddQuote(authorInput, textInput)
 
     setValidAuthor(false)
     setAuthorBlur(false)
@@ -64,7 +65,7 @@ const QuoteForm = () => {
           value={authorInput}
           onChange={authorInputHandler}
           onBlur={authorBlurHandler}
-          className={`${validAuthorInput ? "invalid" : ""}`}
+          className={`${validAuthorInput ? '' : styles.invalid}`}
         />
         {!validAuthorInput && <p>Field must not be empty</p>}
         <label htmlFor="text">Text</label>
@@ -74,7 +75,7 @@ const QuoteForm = () => {
           value={textInput}
           onChange={textInputHandler}
           onBlur={textBlurHandler}
-          className={`${validTextInput ? "invalid" : ""}`}
+          className={`${validTextInput ? '' : styles.invalid}`}
         />
         {!validTextInput && <p>Field must not be empty</p>}
       </div>

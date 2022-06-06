@@ -30,6 +30,16 @@
     outline: 1px solid #888;
 }
 
+.input p {
+    color: #f00;
+    margin: 3px 5px 7px;
+}
+
+.invalid {
+    background-color: #fcb2aa;
+    outline: 2px solid #fa8072;
+}
+
 .actions {
     text-align: end;
     margin-top: 10px;

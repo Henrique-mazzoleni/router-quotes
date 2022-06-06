@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import MainHeader from "./MainHeader";
@@ -42,6 +42,24 @@ const DUMMY_QUOTES = [
 ];
 
 const Layout = () => {
+  const [quoteList, setQuoteList] = useState(DUMMY_QUOTES)
+
+  const addQuoteHandler = (author, text) => {
+    setQuoteList(state => [{id: String(Math.random()), text, author, created_at: new Date(), comments: []}, ...state])
+  }
+
+  const addCommentHandler = (quoteId, comment) => {
+    const quote = quoteList.find((quote) => quote.id === quoteId)
+    const quote_index = quoteList.indexOf(quote)
+
+    const comments = [comment, ...quoteList[quote_index].comments]
+    quote.comments = comments
+
+    const newList = [...quoteList]
+    newList[quote_index] = quote
+    setQuoteList(newList)
+  }
+
   return (
     <Fragment>
       <MainHeader />
@@ -50,13 +68,13 @@ const Layout = () => {
       </Route>
       <Switch>
         <Route path="/quotes" exact>
-          <Quotes list={DUMMY_QUOTES} />
+          <Quotes list={quoteList} />
         </Route>
         <Route path="/quotes/:quoteId">
-          <SingleQuote list={DUMMY_QUOTES} />
+          <SingleQuote list={quoteList} onAddComment={addCommentHandler} />
         </Route>
         <Route path="/add_quote">
-          <AddQuote />
+          <AddQuote onAddQuote={addQuoteHandler} />
         </Route>
       </Switch>
     </Fragment>

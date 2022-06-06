@@ -1,0 +1,42 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+}
+
+.input label {
+    text-align: center;
+    font-weight: bold;
+}
+
+.input textarea {
+    margin: 10px 0;
+    height: 15vh;
+    outline: none;
+    padding: 10px;
+}
+
+.actions {
+    text-align: center;
+}
+
+.button {
+    background-color: #777;
+    border-color: #777;
+    color: #eee;
+}
+
+.invalid {
+    background-color: #fcb2aa;
+    outline: 2px solid #fa8072;
+}
+
+.input p {
+    color: #f00;
+    margin-bottom: 5px;
+}
