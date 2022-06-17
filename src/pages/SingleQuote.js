@@ -1,17 +1,25 @@
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import Comments from "../components/comments/Comments";
 import CommentItem from "../components/comments/CommentItem";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
+import { quotesActions } from '../store';
 
 import styles from "./SingleQuote.module.css";
 
-const SingleQuote = (props) => {
+const SingleQuote = () => {
   const params = useParams();
-  const selectedQuote = props.list.find((quote) => quote.id === params.quoteId);
+  const dispatch = useDispatch()
+  const quotesList = useSelector(state => state.quotesList)
+  const selectedQuote = quotesList.find((quote) => quote.id === params.quoteId);
 
   const commentAddHandler = (comment) => {
-    props.onAddComment(selectedQuote.id, comment)
+    dispatch(quotesActions.addComment({
+      quoteId: selectedQuote.id,
+      comment
+    }))
   }
 
   if (!selectedQuote) return <NoQuotesFound />

@@ -1,25 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { useSelector } from "react-redux";
 
 import QuoteItem from "../components/quotes/QuoteItem";
 import Button from "../components/ui/Button";
 
 import styles from "./Quotes.module.css";
 
-const Quotes = (props) => {
+const Quotes = () => {
   const [orderAscending, setOrderAscending] = useState(true);
   const [renderedQuotes, setRenderedQuotes] = useState([]);
+  const stateQuotesList = useSelector(state => state.quotesList)
+  const quotesList = useMemo(() => [...stateQuotesList], [stateQuotesList])
 
   useEffect(() => {
-    props.list.sort((a, b) => {
-      if (orderAscending) return a.created_at - b.created_at;
-      return b.created_at - a.created_at;
+    quotesList.sort((a, b) => {
+      if (orderAscending) return new Date(a.created_at) - new Date(b.created_at);
+      return new Date(b.created_at) - new Date(a.created_at);
     });
     setRenderedQuotes(
-      props.list.map((quote) => (
+      quotesList.map((quote) => (
         <QuoteItem key={quote.id} id={quote.id} text={quote.text} author={quote.author} />
       ))
     );
-  }, [orderAscending, props.list]);
+  }, [orderAscending, quotesList]);
 
   const toggleOrderHandler = () => {
     setOrderAscending((state) => !state);
