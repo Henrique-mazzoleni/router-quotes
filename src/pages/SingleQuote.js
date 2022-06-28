@@ -1,37 +1,21 @@
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams, Route, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
-import Comments from "../components/comments/Comments";
-import CommentItem from "../components/comments/CommentItem";
+import QuoteComments from "./QuoteComments";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
-import { quotesActions } from '../store';
+
+import Button from "../components/ui/Button";
 
 import styles from "./SingleQuote.module.css";
 
 const SingleQuote = () => {
   const params = useParams();
-  const dispatch = useDispatch()
-  const quotesList = useSelector(state => state.quotesList)
+  const quotesList = useSelector((state) => state.quotesList);
   const selectedQuote = quotesList.find((quote) => quote.id === params.quoteId);
+  console.log(params);
 
-  const commentAddHandler = (comment) => {
-    dispatch(quotesActions.addComment({
-      quoteId: selectedQuote.id,
-      comment
-    }))
-  }
-
-  if (!selectedQuote) return <NoQuotesFound />
-
-  let comments = (
-    <CommentItem>There are no comments for this quote. Be the first to make one!</CommentItem>
-  );
-
-  if (selectedQuote.comments.length !== 0)
-    comments = selectedQuote.comments.map((comment) => (
-      <CommentItem key={comment.id}>{comment.text}</CommentItem>
-    ));
+  if (!selectedQuote) return <NoQuotesFound />;
 
   return (
     <div className={styles.quote}>
@@ -39,7 +23,17 @@ const SingleQuote = () => {
         text={selectedQuote.text}
         author={selectedQuote.author}
       />
-      <Comments comments={comments} onCommentAdd={commentAddHandler} />
+      <Route path={`/quotes/${selectedQuote.id}`} exact>
+        <Link to={`/quotes/${selectedQuote.id}/comments`}>
+          <Button className={styles.button}>Show Comments</Button>
+        </Link>
+      </Route>
+      <Route path="/quotes/:quoteId/comments">
+        <QuoteComments
+          comments={selectedQuote.comments}
+          id={selectedQuote.id}
+        />
+      </Route>
     </div>
   );
 };

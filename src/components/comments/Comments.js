@@ -6,15 +6,10 @@ import Button from "../ui/Button";
 import styles from "./Comments.module.css";
 
 const Comments = (props) => {
-  const [showComments, setShowComments] = useState(false);
   const [showCommentForm, setShowCommentForm] = useState(false);
 
   const toggleCommentFormHandler = () => {
     setShowCommentForm(state => !state);
-  };
-
-  const showCommentsHandler = () => {
-    setShowComments(true);
   };
 
   const addCommentHandler = (text) => {
@@ -23,14 +18,6 @@ const Comments = (props) => {
       text
     }
     props.onCommentAdd(comment)
-  }
-
-  if (!showComments) {
-    return (
-      <Button onAction={showCommentsHandler} className={styles.button}>
-        Show Comments
-      </Button>
-    );
   }
 
   return (
